@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Delícias | Confeitaria Artesanal Premium</title>
+    
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="Doces artesanais feitos com carinho e ingredientes selecionados. Bolos de pote, bolos festivos e brigadeiros gourmet em uma experiência única.">
+    <meta property="og:title" content="Fábrica de Delícias | Momentos Doces">
+    <meta property="og:description" content="Transformando momentos especiais em doces inesquecíveis.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* 
+        -----------------------------------------------------------
+        VARIABLES & BASE
+        -----------------------------------------------------------
+        */
+        :root {
+            --primary: #4A2C2A; /* Chocolate Profundo */
+            --secondary: #D4AF37; /* Dourado Suave */
+            --accent: #F8D7DA; /* Rosa Quartzo Sutil */
+            --bg-creme: #FDFBF7;
+            --white: #FFFFFF;
+            --text-main: #333333;
+            --text-light: #707070;
+            --glass: rgba(255, 255, 255, 0.8);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-creme);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        ul { list-style: none; }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; border-radius: 12px; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 
+        -----------------------------------------------------------
+        NAVBAR
+        -----------------------------------------------------------
+        */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 12px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-weight: 400;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-cta-nav {
+            background: var(--primary);
+            color: var(--white) !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .btn-cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 44, 42, 0.3);
+        }
+
+        /* 
+        -----------------------------------------------------------
+        HERO SECTION
+        -----------------------------------------------------------
+        */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: radial-gradient(circle at top right, #fff5f5 0%, #fdfbf7 50%);
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Composition Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-img {
+            width: 80%;
+            z-index: 2;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(20px 20px 50px rgba(0,0,0,0.1));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Forma orgânica */
+        }
+
+        .shape-blob {
+            position: absolute;
+            background: var(--accent);
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .floating-element {
+            position: absolute;
+            z-index: 3;
+            animation: float-delayed 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes float-delayed {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(15px, -15px) rotate(5deg); }
+        }
+
+        /* 
+        -----------------------------------------------------------
+        PRODUTOS
+        -----------------------------------------------------------
+        */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 24px;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 20px;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .product-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* 
+        -----------------------------------------------------------
+        DIFERENCIAIS
+        -----------------------------------------------------------
+        */
+        .features {
+            background: #fdf5f5;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* 
+        -----------------------------------------------------------
+        SOBRE
+        -----------------------------------------------------------
+        */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+        }
+
+        .about-img-wrapper {
+            position: relative;
+        }
+
+        .about-img-wrapper img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 100px 20px 100px 20px;
+        }
+
+        /* 
+        -----------------------------------------------------------
+        TESTEMUNHOS
+        -----------------------------------------------------------
+        */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .stars {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .user-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        /* 
+        -----------------------------------------------------------
+        CTA SECTION
+        -----------------------------------------------------------
+        */
+        .cta-section {
+            background: var(--primary);
+            border-radius: 40px;
+            margin: 0 20px 100px;
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 20px 45px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* 
+        -----------------------------------------------------------
+        FOOTER
+        -----------------------------------------------------------
+        */
+        footer {
+            background: var(--white);
+            padding: 80px 0 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* 
+        -----------------------------------------------------------
+        RESPONSIVIDADE
+        -----------------------------------------------------------
+        */
+        @media (max-width: 992px) {
+            .hero-content h1 { font-size: 3rem; }
+            .hero-grid, .about-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-btns { justify-content: center; }
+            .about-text { order: 2; }
+            .about-img-wrapper { order: 1; }
+            .nav-links { display: none; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .section-title h2 { font-size: 2.2rem; }
+            .cta-section h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">Fábrica de Delícias</a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#depoimentos">Depoimentos</a></li>
+            </ul>
+            <a href="https://wa.me/seunumeroaqui" class="btn-cta-nav">Fazer Pedido</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Transformando momentos em doces inesquecíveis.</h1>
+                <p>Confeitaria artesanal de alto padrão com ingredientes selecionados para paladares exigentes.</p>
+                <div class="hero-btns">
+                    <a href="#produtos" class="btn btn-primary">Fazer Pedido</a>
+                    <a href="#produtos" class="btn btn-secondary">Ver Cardápio</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="shape-blob"></div>
+                <!-- Placeholder de Imagem de Bolo Premium -->
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Bolo de Chocolate Artesanal" class="main-img">
+                <div class="floating-element" style="top: 10%; right: 5%;">✨</div>
+                <div class="floating-element" style="bottom: 20%; left: 0%;">🍰</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="section-padding features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <span class="feature-icon">🌿</span>
+                    <h3>Ingredientes Premium</h3>
+                    <p>Utilizamos apenas o melhor chocolate belga e frutas frescas selecionadas.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.1s">
+                    <span class="feature-icon">👨‍🍳</span>
+                    <h3>Artesanal</h3>
+                    <p>Cada doce é único, produzido manualmente com máximo cuidado e carinho.</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.2s">
+                    <span class="feature-icon">🚀</span>
+                    <h3>Entrega Ágil</h3>
+                    <p>Seus doces chegam perfeitos e frescos no conforto da sua casa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUTOS -->
+    <section class="section-padding" id="produtos">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Nossas Especialidades</h2>
+                <p>Uma seleção exclusiva de sabores autorais</p>
+            </div>
+            <div class="product-grid">
+                <!-- Card 1 -->
+                <div class="product-card reveal">
+                    <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Bolo de Pote" class="product-img">
+                    <h3>Bolo de Pote Ninho</h3>
+                    <p>Camadas generosas de brigadeiro de leite Ninho com morangos frescos.</p>
+                    <span class="price">R$ 18,90</span>
+                    <a href="#" class="btn btn-secondary">Pedir Agora</a>
+                </div>
+                <!-- Card 2 -->
+                <div class="product-card reveal" style="transition-delay: 0.1s">
+                    <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Bolo de Chocolate" class="product-img">
+                    <h3>Red Velvet Supreme</h3>
+                    <p>Massa aveludada com recheio cremoso à base de cream cheese premium.</p>
+                    <span class="price">R$ 145,00</span>
+                    <a href="#" class="btn btn-secondary">Pedir Agora</a>
+                </div>
+                <!-- Card 3 -->
+                <div class="product-card reveal" style="transition-delay: 0.2s">
+                    <img src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Brigadeiros" class="product-img">
+                    <h3>Combo Gourmet</h3>
+                    <p>Caixa com 12 brigadeiros artesanais nos sabores clássicos e modernos.</p>
+                    <span class="price">R$ 42,00</span>
+                    <a href="#" class="btn btn-secondary">Pedir Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="section-padding" id="sobre">
+        <div class="container about-content">
+            <div class="about-img-wrapper reveal">
+                <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Nossa Cozinha">
+            </div>
+            <div class="about-text reveal">
+                <h2>O sabor que conta uma história.</h2>
+                <p>A <strong>Fábrica de Delícias</strong> nasceu da paixão por transformar açúcar e afeto em experiências memoráveis. O que começou em uma pequena cozinha familiar, hoje é referência em confeitaria artesanal premium.</p>
+                <br>
+                <p>Cada receita é desenvolvida com rigor técnico e sensibilidade artística, garantindo que você receba não apenas um doce, mas um momento de felicidade real.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="section-padding features" id="depoimentos">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>O que nossos clientes dizem</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars">★★★★★</div>
+                    <p>"O melhor Red Velvet que já comi na vida. A apresentação é impecável e o sabor é equilibrado."</p>
+                    <div class="user-info">
+                        <img src="https://i.pravatar.cc/100?u=1" alt="Cliente">
+                        <div>
+                            <strong>Mariana Silva</strong>
+                            <small>Advogada</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.1s">
+                    <div class="stars">★★★★★</div>
+                    <p>"Fiz o pedido para o aniversário da minha filha e todos os convidados ficaram encantados com os brigadeiros."</p>
+                    <div class="user-info">
+                        <img src="https://i.pravatar.cc/100?u=2" alt="Cliente">
+                        <div>
+                            <strong>Ricardo Santos</strong>
+                            <small>Empresário</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.2s">
+                    <div class="stars">★★★★★</div>
+                    <p>"Atendimento nota mil. O bolo chegou fresquinho e a entrega foi super pontual. Recomendo muito!"</p>
+                    <div class="user-info">
+                        <img src="https://i.pravatar.cc/100?u=3" alt="Cliente">
+                        <div>
+                            <strong>Carla Oliveira</strong>
+                            <small>Designer</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="container reveal">
+        <div class="cta-section">
+            <h2>Pronto para adoçar seu dia?</h2>
+            <p>Clique no botão abaixo e faça seu pedido agora mesmo pelo WhatsApp.</p>
+            <br><br>
+            <a href="https://wa.me/seunumeroaqui" class="btn btn-whatsapp">
+                Encomendar pelo WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">Fábrica de Delícias</div>
+                    <p>Criando doces momentos desde 2024. Qualidade e carinho em cada detalhe.</p>
+                </div>
+                <div>
+                    <h4>Links</h4>
+                    <ul style="margin-top: 20px;">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#produtos">Cardápio</a></li>
+                        <li><a href="#sobre">Nossa História</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contato</h4>
+                    <ul style="margin-top: 20px;">
+                        <li>📍 Rio de Janeiro, RJ</li>
+                        <li>📱 (21) 99999-9999</li>
+                        <li>📸 @fabrica_de.delicias</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Fábrica de Delícias. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // -----------------------------------------------------------
+        // INTERATIVIDADE & ANIMAÇÕES
+        // -----------------------------------------------------------
+
+        // 1. Navbar Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 3. Smooth Scroll (Fallback para navegadores antigos)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 4. Efeito de brilho sutil nos botões
+        const primaryBtns = document.querySelectorAll('.btn-primary');
+        primaryBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                btn.style.setProperty('--x', `${x}px`);
+                btn.style.setProperty('--y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
